@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية الاحترافية</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --text: #334155;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--light); color: var(--text); line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; background: white; margin: 0 auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        header { text-align: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 25px; }
+        header h1 { color: var(--dark); font-size: 28px; margin-bottom: 8px; }
+        header p { color: var(--primary); font-weight: bold; font-size: 18px; }
+        .section { margin-bottom: 30px; }
+        .section-title { color: var(--dark); border-right: 4px solid var(--primary); padding-right: 10px; margin-bottom: 15px; font-size: 20px; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; background: #f1f5f9; padding: 15px; border-radius: 8px; }
+        .card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 12px; }
+        .card h3 { color: var(--dark); font-size: 16px; }
+        .card .date { color: #64748b; font-size: 13px; font-weight: 500; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-tag { background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 20px; font-size: 14px; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>أحمد محمد ماهر</h1>
+        <p> /(محاسب)</p>
+    </header>
+
+    <div class="section">
+        <h2 class="section-title">بيانات الاتصال</h2>
+        <div class="info-grid">
+            <div><strong>البريد الإلكتروني:</strong> Ahmedmahercpa@gmail.com</div>
+            <div><strong>الهاتف:</strong> +2 01112258114
+          </div>
+            <div><strong>الموقع الحالي:</strong> القاهرة، مصر</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">الخبرات المهنية</h2>
+        <div class="card">
+            <h3>اسم الوظيفة - اسم الشركة</h3>
+            <span class="date">2024 - الحالي</span>
+            <p>اكتب هنا باختصار أهم المهام والإنجازات التي قمت بها في هذه الوظيفة.</p>
+        </div>
+        <div class="card">
+            <h3>وظيفة سابقة - الشركة السابقة</h3>
+            <span class="date">2022 - 2024</span>
+            <p>اكتب هنا تفاصيل خبرتك السابقة والمهارات التي اكتسبتها.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">التعليم والشهادات</h2>
+        <div class="card">
+            <h3>بكالوريوس في التخصص الخاص بك</h3>
+            <span class="date">اسم الجامعة | سنة التخرج</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">المهارات الشخصية والتقنية</h2>
+        <div class="skills-list">
+            <span class="skill-tag">مهارة 1</span>
+            <span class="skill-tag">مهارة 2</span>
+            <span class="skill-tag">إدارة المشاريع</span>
+            <span class="skill-tag">حل المشكلات</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
