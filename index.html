@@ -3,80 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>السيرة الذاتية الاحترافية</title>
+    <title>السيرة الذاتية المتكاملة | Comprehensive Resume</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --text: #334155;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --primary-color: #0f172a; /* كحلي ملكي داكن */
+            --accent-color: #d97706;  /* ذهبي برونزي دافئ */
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--light); color: var(--text); line-height: 1.6; padding: 20px; }
-        .container { max-width: 800px; background: white; margin: 0 auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        header { text-align: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 25px; }
-        header h1 { color: var(--dark); font-size: 28px; margin-bottom: 8px; }
-        header p { color: var(--primary); font-weight: bold; font-size: 18px; }
-        .section { margin-bottom: 30px; }
-        .section-title { color: var(--dark); border-right: 4px solid var(--primary); padding-right: 10px; margin-bottom: 15px; font-size: 20px; }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; background: #f1f5f9; padding: 15px; border-radius: 8px; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 12px; }
-        .card h3 { color: var(--dark); font-size: 16px; }
-        .card .date { color: #64748b; font-size: 13px; font-weight: 500; }
-        .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .skill-tag { background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 20px; font-size: 14px; font-weight: 500; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid var(--accent-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        header h1 { font-size: 3rem; font-weight: 700; margin-bottom: 8px; }
+        header .subtitle { font-size: 1.4rem; color: var(--accent-color); font-weight: 300; }
+
+        .lang-btn {
+            position: absolute; top: 25px; left: 25px;
+            background: transparent; color: white; border: 2px solid var(--accent-color);
+            padding: 8px 20px; border-radius: 30px; cursor: pointer;
+            font-weight: 600; font-family: inherit; transition: all 0.3s;
+        }
+
+        .lang-btn:hover { background: var(--accent-color); color: var(--primary-color); }
+        html[dir="ltr"] .lang-btn { left: auto; right: 25px; }
+
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; display: grid; gap: 30px; }
+
+        .section-card {
+            background: var(--card-bg); border-radius: 16px; padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+            border-right: 5px solid var(--primary-color); transition: transform 0.3s;
+        }
+
+        html[dir="ltr"] .section-card { border-right: none; border-left: 5px solid var(--primary-color); }
+        .section-card:hover { transform: translateY(-3px); }
+
+        .section-card h2 {
+            font-size: 1.6rem; color: var(--primary-color); margin-bottom: 22px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .section-card h2::after {
+            content: ''; flex-grow: 1; height: 2px;
+            background: linear-gradient(to left, var(--accent-color), transparent);
+        }
+        html[dir="ltr"] .section-card h2::after { background: linear-gradient(to right, var(--accent-color), transparent); }
+
+        /* تنسيق كتل الخبرة والتعليم */
+        .timeline-item {
+            margin-bottom: 25px; padding-bottom: 20px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .timeline-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .timeline-title { font-weight: 700; color: var(--primary-color); font-size: 1.2rem; }
+        .timeline-meta { font-size: 0.95rem; color: var(--accent-color); margin: 3px 0 10px 0; font-weight: 600; }
+
+        /* شبكة البيانات التفاعلية */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .info-item { background: #f8fafc; padding: 15px 20px; border-radius: 10px; border: 1px solid #edf2f7; }
+        .info-item strong { color: var(--primary-color); display: block; margin-bottom: 4px; }
+
+        /* الوسوم (المهارات والاهتمامات) */
+        .tags-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { background: #f1f5f9; color: var(--primary-color); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.95rem; }
+
+        /* معرض صور الشهادات */
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 15px; }
+        .cert-card {
+            background: #fafafa; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;
+            text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .cert-card img { width: 100%; height: 160px; object-fit: cover; display: block; background: #e2e8f0; }
+        .cert-card p { padding: 12px; font-weight: 600; font-size: 0.95rem; color: var(--primary-color); }
+
+        footer {
+            background-color: var(--primary-color); color: #94a3b8;
+            padding: 35px 20px; text-align: center; margin-top: 60px;
+            border-top: 4px solid var(--accent-color); font-size: 0.95rem;
+        }
+        footer a { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .section-card { padding: 25px 20px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
     <header>
-        <h1>أحمد محمد ماهر</h1>
-        <p> /(محاسب)</p>
+        <button class="lang-btn" onclick="toggleLanguage()">English</button>
+        <div class="header-content">
+            <h1 id="name">أحمد محمد</h1>
+            <p class="subtitle" id="title">مطور ويب / مهندس برمجيات</p>
+        </div>
     </header>
 
-    <div class="section">
-        <h2 class="section-title">بيانات الاتصال</h2>
-        <div class="info-grid">
-            <div><strong>البريد الإلكتروني:</strong> Ahmedmahercpa@gmail.com</div>
-            <div><strong>الهاتف:</strong> +2 01112258114
-          </div>
-            <div><strong>الموقع الحالي:</strong> القاهرة، مصر</div>
+    <div class="container">
+        
+        <!-- البيانات الشخصية والموقع -->
+        <div class="section-card">
+            <h2 id="personal-title">🆔 البيانات الشخصية والاتصال</h2>
+            <div class="grid-layout">
+                <div class="info-item">
+                    <strong id="email-label">البريد الإلكتروني</strong>
+                    <span>ahmed@example.com</span>
+                </div>
+                <div class="info-item">
+                    <strong id="phone-label">الهاتف</strong>
+                    <span dir="ltr">+20 123 456 789</span>
+                </div>
+                <div class="info-item">
+                    <strong id="location-label">الموقع الحالي</strong>
+                    <span id="location-val">القاهرة، مصر</span>
+                </div>
+                <div class="info-item">
+                    <strong id="website-label">الموقع الإلكتروني</strong>
+                    <span>ahmedmohamed0980.github.io</span>
+                </div>
+            </div>
         </div>
+
+        <!-- نبذة عني -->
+        <div class="section-card">
+            <h2 id="about-title">👤 نبذة عني</h2>
+            <p id="about-text" style="color: var(--text-main);">مطور ويب طموح وشغوف ببناء تطبيقات برمجية مبتكرة وعالية الأداء. أمتلك مهارات قوية في تصميم واجهات المستخدم وحل المشكلات لتقديم تجربة رقمية استثنائية.</p>
+        </div>
+
+        <!-- الخبرة العملية -->
+        <div class="section-card">
+            <h2 id="experience-title">💼 الخبرة العملية</h2>
+            <div id="experience-list">
+                <div class="timeline-item">
+                    <div class="timeline-title" id="exp1-title">مطور ويب مستقل (Freelancer)</div>
+                    <div class="timeline-meta" id="exp1-date">2024 - الحالي</div>
+                    <p id="exp1-desc">تصميم وتطوير المواقع الإلكترونية التفاعلية للعملاء باستخدام أحدث تقنيات الويب، وضمان توافقها الكامل مع الهواتف الذكية.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- التعليم -->
+        <div class="section-card">
+            <h2 id="education-title">🎓 التعليم والشهادات الأكاديمية</h2>
+            <div id="education-list">
+                <div class="timeline-item">
+                    <div class="timeline-title" id="edu1-title">بكالوريوس في علوم الحاسب / هندسة البرمجيات</div>
+                    <div class="timeline-meta" id="edu1-date">2020 - 2024</div>
+                    <p id="edu1-desc">دراسة متعمقة في هياكل البيانات، الخوارزميات، تطوير المواقع، وقواعد البيانات المتقدمة.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- الكورسات والشهادات الإضافية وصورها -->
+        <div class="section-card">
+            <h2 id="courses-title">📜 الكورسات والشهادات التدريبية</h2>
+            <div class="cert-grid">
+                <!-- شهادة 1 -->
+                <div class="cert-card">
+                    <!-- استبدل الرابط أدناه برابط صورتك الحقيقية لاحقاً -->
+                    <img src="https://unsplash.com" alt="Certificate">
+                    <p id="cert1-name">شهادة تطوير الويب المتكامل</p>
+                </div>
+                <!-- شهادة 2 -->
+                <div class="cert-card">
+                    <img src="https://unsplash.com" alt="Certificate">
+                    <p id="cert2-name">شهادة JavaScript المتقدمة</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- المهارات التقنية -->
+        <div class="section-card">
+            <h2 id="skills-title">⚡ المهارات التقنية</h2>
+            <div class="tags-container">
+                <span class="tag">HTML5 & CSS3</span>
+                <span class="tag">JavaScript (ES6+)</span>
+                <span class="tag">Git & GitHub</span>
+                <span class="tag">Responsive Web Design</span>
+                <span class="tag">UI/UX Basics</span>
+                <span class="tag">Problem Solving</span>
+            </div>
+        </div>
+
+        <!-- الاهتمامات -->
+        <div class="section-card">
+            <h2 id="interests-title">🎯 الاهتمامات والهوايات</h2>
+            <div class="tags-container" id="interests-list">
+                <span class="tag" id="int1">البرمجة مفتوحة المصدر</span>
+                <span class="tag" id="int2">تكنولوجيا الذكاء الاصطناعي</span>
+                <span class="tag" id="int3">القراءة التقنية</span>
+                <span class="tag" id="int4">السفر واستكشاف الثقافات</span>
+            </div>
+        </div>
+
     </div>
 
-    <div class="section">
-        <h2 class="section-title">الخبرات المهنية</h2>
-        <div class="card">
-            <h3>اسم الوظيفة - اسم الشركة</h3>
-            <span class="date">2024 - الحالي</span>
-            <p>اكتب هنا باختصار أهم المهام والإنجازات التي قمت بها في هذه الوظيفة.</p>
-        </div>
-        <div class="card">
-            <h3>وظيفة سابقة - الشركة السابقة</h3>
-            <span class="date">2022 - 2024</span>
-            <p>اكتب هنا تفاصيل خبرتك السابقة والمهارات التي اكتسبتها.</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">التعليم والشهادات</h2>
-        <div class="card">
-            <h3>بكالوريوس في التخصص الخاص بك</h3>
-            <span class="date">اسم الجامعة | سنة التخرج</span>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">المهارات الشخصية والتقنية</h2>
-        <div class="skills-list">
-            <span class="skill-tag">مهارة 1</span>
-            <span class="skill-tag">مهارة 2</span>
-            <span class="skill-tag">إدارة المشاريع</span>
-            <span class="skill-tag">حل المشكلات</span>
-        </div>
-    </div>
-</div>
-
-</body>
-</html>
+    <footer>
